@@ -2,7 +2,7 @@
 
 This app is currently still in development
 
-# Angualr ES6 Webpack 
+# Angular ES6 Webpack 
 Angular Rezi API Authentication
 
 ## Installation
