@@ -5,7 +5,6 @@ export default function(AuthService, $location, $rootScope) {
         AuthService.getToken(code, function() {
             $rootScope.$apply(function() {
                 $location.path("/loggedin");
-                console.log($location.path());
             });
         });
     } else {
