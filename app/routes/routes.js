@@ -16,6 +16,14 @@ export const routes = [
         }
     },
     {
+        state: 'rezi',
+        config: {
+            templateUrl: 'app/templates/token.html',
+            url: '/Rezi/',
+            controller: 'TokenController as vm'
+        }
+    },
+    {
         state: 'otherwise',
         config: {
             templateUrl: 'app/templates/index.html',
