@@ -1,7 +1,3 @@
-# In development
-
-This app is currently still in development
-
 # Angular ES6 Webpack 
 Angular Rezi API Authentication
 
