@@ -14,10 +14,7 @@ angular.module('app', [ngRoute, uiRouter])
     .controller("HomeController", HomeController)
     .service("AuthService", AuthService)
     .provider('routesProvider', routesProvider)
-    .run(bootstrap)
-    .config(['$locationProvider', function($locationProvider) {
-        $locationProvider.html5Mode(true);
-    }]);;
+    .run(bootstrap);
 
 function bootstrap(routesProvider) {
 	sessionStorage.clear();
