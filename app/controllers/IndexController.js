@@ -1,7 +1,12 @@
-export default function($scope, AuthService, $location) {
+export default function($scope, $rootScope, AuthService, $location) {
     var vm = this;
-    if (sessionStorage.credentials) {
-        $location.path('/loggedin');
+    if (AuthService.parseLocation(window.location.search).code) {
+        let code = AuthService.parseLocation(window.location.search).code;
+        AuthService.getToken(code, function() {
+            $rootScope.$apply(function() {
+                $location.path("/home");
+            });
+        });
     } else {
         window.location = AuthService.BuildAuthUrl();
     }

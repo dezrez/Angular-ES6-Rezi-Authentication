@@ -6,7 +6,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     devtool: 'source-map',
     entry: [
-        'webpack-dev-server/client?http://localhost:8080',
+        'webpack-dev-server/client?https://localhost:8080/',
         'webpack/hot/dev-server',
         './app/index'
     ],
@@ -40,6 +40,7 @@ module.exports = {
     devServer: {
         historyApiFallback: true,
         hot: true,
-        https: true
+        https: true,
+        inline : true
     }
 };

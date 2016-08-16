@@ -8,19 +8,11 @@ export const routes = [
         }
     },
     {
-        state: 'loggedin',
+        state: 'home',
         config: {
-            templateUrl: 'app/templates/loggedin.html',
-            url: '/loggedin',
+            templateUrl: 'app/templates/home.html',
+            url: '/home',
             controller: 'HomeController as vm'
-        }
-    },
-    {
-        state: 'rezi',
-        config: {
-            templateUrl: 'app/templates/token.html',
-            url: '/Rezi/',
-            controller: 'TokenController as vm'
         }
     },
     {

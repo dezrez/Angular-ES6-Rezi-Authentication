@@ -4,7 +4,7 @@ export default function(AuthService, $location, $rootScope) {
         let code = AuthService.parseLocation(window.location.search).code;
         AuthService.getToken(code, function() {
             $rootScope.$apply(function() {
-                $location.path("/loggedin");
+                $location.path("/home");
                 console.log($location.path());
             });
         });
