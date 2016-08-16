@@ -1,9 +1,10 @@
 import superagent from "superagent";
 import * as config from '../config';
 
-export default function($http, $location) {
+export default function ($http, $location) {
     var auth = this;
     auth.authenticationDetails = null;
+    auth.requesting = false;
 
     auth.GetBaseAuthentication = (username, password) => {
         var token = username + ":" + password;
@@ -22,7 +23,7 @@ export default function($http, $location) {
         return url;
     }
 
-    auth.parseLocation = function(location) {
+    auth.parseLocation = function (location) {
         var pairs = location.substring(1).split("&");
         var obj = {};
         var pair;
@@ -36,19 +37,28 @@ export default function($http, $location) {
     };
 
 
-    auth.getToken = function(code, callback) {
+    auth.getToken = function (code, callback) {
         var authConfig = { grant_type: "authorization_code", code: code, redirect_uri: config.redirectUrl };
         var authHeader = { "Authorization": this.GetBaseAuthentication(config.clientId, config.clientPassword) };
-        superagent
-            .post(config.tokenUrl)
-            .set(authHeader)
-            .send(authConfig)
-            .end((err, res) => {
-                if (res.body) {
-                    sessionStorage.credentials = JSON.stringify(res.body);
-                    callback();
-                }
-            });
+        if (!auth.requesting) {
+            auth.requesting = true;
+            superagent
+                .post(config.tokenUrl)
+                .set(authHeader)
+                .send(authConfig)
+                .on('error', () => {
+                    _.delay(() => {
+                        auth.getToken(code, callback);
+                    }, 2000)
+                })
+                .end((err, res) => {
+                    auth.requesting = false;
+                    if (res.body) {
+                        sessionStorage.credentials = JSON.stringify(res.body);
+                        callback();
+                    }
+                });
+        }
     }
 
     return auth;

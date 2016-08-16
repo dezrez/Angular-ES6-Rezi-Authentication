@@ -5,6 +5,7 @@ export default function($scope, $rootScope, AuthService, $location) {
         AuthService.getToken(code, function() {
             $rootScope.$apply(function() {
                 $location.path("/home");
+                $location.search("code", null); 
             });
         });
     } else {
