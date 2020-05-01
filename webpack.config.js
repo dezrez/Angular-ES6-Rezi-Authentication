@@ -15,7 +15,7 @@ module.exports = {
         filename: 'bundle.js'
     },
     resolve: {
-        extensions: ['', '.js']
+        extensions: ['.js']
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
@@ -28,13 +28,13 @@ module.exports = {
         })
     ],
     module: {
-        loaders: [{
+        rules: [{
             test: /\.js?$/,
             loader: 'babel-loader',
             exclude: /node_modules/,
-            query: {
-                presets: ['es2015']
-            }
+						options: {
+							presets: ["@babel/preset-env"]
+						}
         }]
     },
     devServer: {
